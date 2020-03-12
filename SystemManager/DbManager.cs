@@ -10,8 +10,8 @@ using SystemManager.Models;
 namespace SystemManager {
     public static class DbManager {
 
-        private static readonly string password = "";
-        private static SqlConnection newConnection() => new SqlConnection($"Data Source=10.10.8.79;Initial Catalog=TEMP_ELIAS_FAGPROVE;User id=SA;Password={password};");
+        private static readonly string password = "*KjøttkakerSchadenfreudeUniform12";
+        private static SqlConnection newConnection() => new SqlConnection($"Data Source=10.10.8.29;Initial Catalog=TEMP_ELIAS_FAGPROVE;User id=SA;Password={password};");
 
         public static bool RemoveServer(int id) {
             int t = Exec("delete from TEMP_ELIAS_FAGPROVE.dbo.Servers where id = @id", new { id });
@@ -36,7 +36,7 @@ namespace SystemManager {
         }
 
         public static RegisteredServer GetServer(int id) {
-            var data = Query("select top 1 * from TEMP_ELIAS_FAGPROVE.dbo.Servers where id = @id", new { id }).FirstOrDefault();
+            var data = Query("select top 1 * from TEMP_ELIAS_FAGPROVE..dbo.Servers where id = @id", new { id }).FirstOrDefault();
 
             var res = new RegisteredServer((int)data["id"], (string)data["Domain"], (string)data["Username"], (string)data["Password"]);
 

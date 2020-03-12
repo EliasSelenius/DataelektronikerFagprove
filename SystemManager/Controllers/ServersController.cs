@@ -24,6 +24,7 @@ namespace SystemManager.Controllers
             return RedirectToAction("ServerDetails", new { id });
         }
 
+
         public ActionResult Reboot(int id) {
             WmiManager.RebootServer(DbManager.GetServer(id));
             return RedirectToAction("Index");
