@@ -16,9 +16,7 @@ namespace SystemManager {
         private static CimSession createSession(RegisteredServer registeredServer) {
             var options = new DComSessionOptions();
             options.Impersonation = ImpersonationType.Impersonate;
-            var Password = new System.Security.SecureString();
-            for (int i = 0; i < "2WhiskeyFoxtrotTango#".Length; i++) Password.AppendChar("2WhiskeyFoxtrotTango#"[i]);
-            options.AddDestinationCredentials(new CimCredential(PasswordAuthenticationMechanism.Default, "dev-test.nextron.no", "administrator", Password));
+            options.AddDestinationCredentials(new CimCredential(PasswordAuthenticationMechanism.Default, registeredServer.Domain, registeredServer.Username, registeredServer.Password));
 
             var s = CimSession.Create(registeredServer.Domain, options);
 
