@@ -1,0 +1,11 @@
+﻿
+
+Simplifisert Oppgave beskrivelse:
+
+lag et server management system
+
+	- <Done>legge til/fjerne servere som skal Manages
+	- <Done>liste med alle servere i systemet
+	- strøm styring av servere
+	- kontroll av services (status, start, stop, restart)
+	- server CPU og RAM bruk (per prosess)

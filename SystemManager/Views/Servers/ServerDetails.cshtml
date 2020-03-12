@@ -1,0 +1,58 @@
+﻿@model SystemManager.Models.Server
+
+@{
+    ViewData["Title"] = "ServerDetails";
+}
+
+<h1>ServerDetails</h1>
+@if (Model.ConnectionError) {
+    <p>WMI Connection error</p>
+} else {
+
+<div>
+    <h4>@Model.Name</h4>
+    
+    <hr />
+    <h5>Operating System Properties</h5>
+    <dl>
+        @foreach (var item in Model.OperatingSystemProps) {
+            <dt>@item.Key</dt>
+            <dd>@item.Value</dd>
+        }
+    </dl>
+
+    <hr />
+
+    <h5>Services</h5>
+    <div style="overflow:auto">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    @foreach (var item in Model.Services[0].CimInstanceProperties) {
+                    <th>@item.Name</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var service in Model.Services) {
+                <tr>
+                    @{
+                        var isRunning = service.CimInstanceProperties["State"].Value.Equals("Running");
+                    }
+                    <td><a href="/Servers/InvokeService/@Model.Id?service=@service.CimInstanceProperties["Name"].Value&name=@(isRunning?"StopService":"StartService")">@(isRunning ? "Stop" : "Start")</a></td>
+
+                    @foreach (var propy in service.CimInstanceProperties) {
+                        <td>@propy.Value</td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+}

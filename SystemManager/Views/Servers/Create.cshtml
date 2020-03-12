@@ -1,0 +1,36 @@
+﻿@model SystemManager.Models.RegisteredServer
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4>Register new server</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label>Domain</label>
+                <input name="Domain" type="text" />
+                <br />
+                <label>Username</label>
+                <input name="Username" type="text" />
+                <br />
+                <label>Password</label>
+                <input name="Password" type="password" />
+                <br />
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

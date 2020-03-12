@@ -1,0 +1,45 @@
+﻿
+@model List<RegisteredServer>
+@{
+    ViewData["Title"] = "Servers";
+}
+
+
+<style>
+    .server-list {
+        margin: 50px;
+    }
+
+    .server-list-item:nth-child(odd) {
+        background-color: #eee;
+    }
+
+    .server-list-item:nth-child(even) {
+        background-color: #ddd;
+    }
+
+    .action-links-list {
+        padding: 0, 15px, 0, 15px;
+        text-align: end;
+    }
+
+</style>
+
+
+<h1>servers</h1>
+<div class="server-list">
+    <p>Number of servers: @Model.Count()</p>
+
+    @foreach (var item in Model) {
+    <div class="server-list-item">
+        <p>@item.Domain</p>
+        <div class="action-links-list">
+            <a href="/Servers/ServerDetails/@item.Id">details</a> |
+            <a href="/Servers/Delete/@item.Id">delete</a> |
+            <a href="/Servers/Reboot/@item.Id">reboot</a>
+        </div>
+    </div>
+    }
+    @Html.ActionLink("add", "Create", "Servers")
+
+</div>
